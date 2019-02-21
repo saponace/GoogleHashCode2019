@@ -16,7 +16,7 @@ public class Pizza {
 		this.grid = new IngredientEnum[rows-1][columns-1];
 	}
 	
-	private Boolean isSliceAvailable(Slice slice, SubjectParameters parameters) {
+	public Boolean isSliceValid(Slice slice, SubjectParameters parameters) {
 		Integer numberOfTomatoes = slice.getNumberOfTomatoes();
 		Integer numberOfMushrooms = slice.getNumberOfMushroom();
 		return (numberOfTomatoes >= parameters.getL() &&
@@ -24,11 +24,21 @@ public class Pizza {
 				numberOfTomatoes+numberOfMushrooms <= parameters.getH());
 	}
 	
+	public Boolean isCellInSlices(Integer row, Integer column) {
+		for (Slice slice : slices) {
+			if (row >= slice.getR1() && row <= slice.getR2() &&
+				column >= slice.getC1() && column <= slice.getC2()) {
+				return Boolean.FALSE;
+			}
+		}
+		return Boolean.TRUE;
+	}
+
 	public void setIngredient(Integer row, Integer column, IngredientEnum ingredient) {
 		grid[row][column] = ingredient;
 	}
 	
-	private void addSlice(Slice slice) {
+	public void addSlice(Slice slice) {
 		slices.add(slice);
 	}
 
