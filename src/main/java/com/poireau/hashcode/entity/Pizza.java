@@ -13,7 +13,7 @@ public class Pizza {
 	public Pizza(Integer rows, Integer columns) {
 		this.numberOfRows = rows;
 		this.numberOfColumns = columns;
-		this.grid = new IngredientEnum[rows-1][columns-1];
+		this.grid = new IngredientEnum[rows][columns];
 	}
 	
 	public Boolean isSliceValid(Slice slice, SubjectParameters parameters) {

@@ -34,7 +34,6 @@ public class App {
         LOGGER.info("Subject parameters: " + subjectParameters.getL() + "; " + subjectParameters.getH());
 
         String output = pizza.toString();
-        IoUtils.writeToFile(outputFile, output);
         LOGGER.info(profiler.measure(inputFile + " execution time: "));
     }
 }

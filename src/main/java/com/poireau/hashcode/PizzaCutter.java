@@ -31,11 +31,11 @@ public class PizzaCutter {
                     for (Integer colInSlice = col; colInSlice < pizza.getNumberOfColumns() - col; colInSlice++) {
                         Slice slice = new Slice(row, col, rowInSlice, colInSlice);
 
-                        if (slice.hasTooMuchIngredients(params.getMaximumOfIngredients())) {
+                        if (slice.hasTooMuchIngredients(params.getH())) {
                             break;
                         }
 
-                        if (slice.hasEnoughOfEachIngredient(params.getMinimumOfEachIngredient())) {
+                        if (slice.hasEnoughOfEachIngredient(params.getL())) {
                             pizza.addSlice(slice);
                             break;
                         }
