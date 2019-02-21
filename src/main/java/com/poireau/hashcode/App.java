@@ -32,8 +32,9 @@ public class App {
         LOGGER.info("Content of pizza: " + pizza.toString());
         SubjectParameters subjectParameters = IoUtils.readSubjectParameters(inputFile);
         LOGGER.info("Subject parameters: " + subjectParameters.getL() + "; " + subjectParameters.getH());
-
-        String output = pizza.toString();
+        PizzaCutter pizzaCutter = new PizzaCutter(pizza, subjectParameters);
+        pizzaCutter.cutSlices();
+        IoUtils.writeSlices(pizza, outputFile);
         LOGGER.info(profiler.measure(inputFile + " execution time: "));
     }
 }
