@@ -16,12 +16,21 @@ public class Slice {
 		this.c2 = c2;
 	}
 	
-	private void addIngredient(IngredientEnum ingredient) {
+	public void addIngredient(IngredientEnum ingredient) {
 		if (IngredientEnum.TOMATO.equals(ingredient)) {
 			numberOfTomatoes++;
 		} else if (IngredientEnum.MUSHROOM.equals(ingredient)) {
 			numberOfMushroom++;
 		}
+	}
+	
+	public Boolean hasEnoughOfEachIngredient(Integer numberOfEachIngredient) {
+		return (this.getNumberOfMushroom() >= numberOfEachIngredient &&
+				this.getNumberOfTomatoes() >= numberOfEachIngredient);
+	}
+	
+	public Boolean hasTooMuchIngredients(Integer numberOfIngredients) {
+		return (this.getNumberOfMushroom() + this.getNumberOfTomatoes() > numberOfIngredients);
 	}
 
 	public Integer getR1() {
