@@ -2,6 +2,9 @@ package com.poireau.hashcode;
 
 import com.poireau.hashcode.utils.IoUtils;
 import com.poireau.hashcode.utils.Profiler;
+import com.poireau.hashcode.entity.Pizza;
+import com.poireau.hashcode.entity.Slice;
+import com.poireau.hashcode.entity.SubjectParameters;
 import com.poireau.hashcode.utils.FilesPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,14 +28,14 @@ public class PizzaCutter {
                 }
 
                 for (Integer rowInSlice = row; rowInSlice < pizza.getNumberOfRows() - row; rowInSlice++) {
-                    for (Integer colInSlice = col; colInSlice < pizza.getNumberOfCols() - col; colInSlice++) {
-                        slice = new Slice(row, col, rowInSlice, colInSlice);
+                    for (Integer colInSlice = col; colInSlice < pizza.getNumberOfColumns() - col; colInSlice++) {
+                        Slice slice = new Slice(row, col, rowInSlice, colInSlice);
 
                         if (slice.hasTooMuchIngredients(params.getMaximumOfIngredients())) {
                             break;
                         }
 
-                        if (slice.hasEnoughOfEachIngredient(params.getMinimumOfEachIngredient)) {
+                        if (slice.hasEnoughOfEachIngredient(params.getMinimumOfEachIngredient())) {
                             pizza.addSlice(slice);
                             break;
                         }
