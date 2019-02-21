@@ -30,16 +30,20 @@ public class PizzaCutter {
 
                 for (Integer rowInSlice = row; rowInSlice < pizza.getNumberOfRows() - row; rowInSlice++) {
                     for (Integer colInSlice = col; colInSlice < pizza.getNumberOfColumns() - col; colInSlice++) {
-                        Slice slice = new Slice(row, col, rowInSlice, colInSlice);
-                        getContentOfSlice(pizza, slice, row, col, rowInSlice, colInSlice);
+                        if (!pizza.isCellInSlices(row, col)) {
+                            Slice slice = new Slice(row, col, rowInSlice, colInSlice);
+                            getContentOfSlice(pizza, slice, row, col, rowInSlice, colInSlice);
 
-                        if (slice.hasTooMuchIngredients(params.getH())) {
-                            break;
-                        }
+                            if (slice.hasTooMuchIngredients(params.getH())) {
+                                break;
+                            }
 
-                        if (slice.hasEnoughOfEachIngredient(params.getL())) {
-                            pizza.addSlice(slice);
-                            break;
+                            if (slice.hasEnoughOfEachIngredient(params.getL())) {
+                                pizza.addSlice(slice);
+                                row = slice.getR1();
+                                col = slice.getC2() + 1;
+                                break;
+                            }
                         }
                     }
                 }
@@ -50,8 +54,8 @@ public class PizzaCutter {
     }
 
 	private void getContentOfSlice(Pizza pizza, Slice slice, Integer row, Integer col, Integer rowInSlice, Integer colInSlice) {
-		for (Integer rowCount = row; rowCount < rowInSlice; rowCount++) {
-			for (Integer colCount = col; colCount < colInSlice; colCount++) {
+		for (Integer rowCount = row; rowCount <= rowInSlice; rowCount++) {
+			for (Integer colCount = col; colCount <= colInSlice; colCount++) {
 				slice.addIngredient(pizza.getContentCell(rowCount, colCount));
 			}
 		}

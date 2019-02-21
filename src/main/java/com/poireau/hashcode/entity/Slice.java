@@ -14,6 +14,8 @@ public class Slice {
 		this.c1 = c1;
 		this.r2 = r2;
 		this.c2 = c2;
+		numberOfMushroom = 0;
+		numberOfTomatoes = 0;
 	}
 	
 	public void addIngredient(IngredientEnum ingredient) {
@@ -56,7 +58,9 @@ public class Slice {
 	public Integer getNumberOfTomatoes() {
 		return numberOfTomatoes;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+	    return r1 + " " + c1 + " " + r2 + " " + c2;
+	}
 }
