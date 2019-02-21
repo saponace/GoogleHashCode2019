@@ -28,10 +28,10 @@ public class Pizza {
 		for (Slice slice : slices) {
 			if (row >= slice.getR1() && row <= slice.getR2() &&
 				column >= slice.getC1() && column <= slice.getC2()) {
-				return Boolean.FALSE;
+				return Boolean.TRUE;
 			}
 		}
-		return Boolean.TRUE;
+		return Boolean.FALSE;
 	}
 
 	public void setIngredient(Integer row, Integer column, IngredientEnum ingredient) {

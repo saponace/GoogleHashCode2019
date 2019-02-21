@@ -25,12 +25,12 @@ public class Slice {
 	}
 	
 	public Boolean hasEnoughOfEachIngredient(Integer numberOfEachIngredient) {
-		return (this.getNumberOfMushroom() >= numberOfEachIngredient &&
-				this.getNumberOfTomatoes() >= numberOfEachIngredient);
+		return (numberOfMushroom >= numberOfEachIngredient &&
+				numberOfTomatoes >= numberOfEachIngredient);
 	}
 	
 	public Boolean hasTooMuchIngredients(Integer numberOfIngredients) {
-		return (this.getNumberOfMushroom() + this.getNumberOfTomatoes() > numberOfIngredients);
+		return (numberOfMushroom + numberOfTomatoes > numberOfIngredients);
 	}
 
 	public Integer getR1() {
