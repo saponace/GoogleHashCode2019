@@ -17,7 +17,7 @@ public class Pizza {
 		this.grid = new IngredientEnum[rows-1][columns-1];
 	}
 	
-	private Boolean isSliceAvailable(Slice slice, SubjectParameters parameters) {
+	private Boolean isSliceValid(Slice slice, SubjectParameters parameters) {
 		Integer numberOfTomatoes = slice.getNumberOfTomatoes();
 		Integer numberOfMushrooms = slice.getNumberOfMushroom();
 		return (numberOfTomatoes >= parameters.getMinimumOfEachIngredient() && 
