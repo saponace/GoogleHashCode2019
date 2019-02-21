@@ -2,22 +2,19 @@ package com.poireau.hashcode.entity;
 
 public class SubjectParameters {
 
-	private Integer minimumOfEachIngredient;
-	private Integer maximumOfIngredients;
+	private Integer l;
+	private Integer h;
 	
-	public SubjectParameters(Integer minimimOfEachIngredient, Integer maximumOfIngredients) {
-		this.minimumOfEachIngredient = minimimOfEachIngredient;
-		this.maximumOfIngredients = maximumOfIngredients;
+	public SubjectParameters(Integer l, Integer h) {
+		this.l = l;
+		this.h = h;
 	}
 
-	public Integer getMinimumOfEachIngredient() {
-		return minimumOfEachIngredient;
+	public Integer getL() {
+		return l;
 	}
 
-	public Integer getMaximumOfIngredients() {
-		return maximumOfIngredients;
+	public Integer getH() {
+		return h;
 	}
-	
-	
-	
 }

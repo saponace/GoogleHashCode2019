@@ -1,6 +1,5 @@
 package com.poireau.hashcode.entity;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +19,24 @@ public class Pizza {
 	private Boolean isSliceAvailable(Slice slice, SubjectParameters parameters) {
 		Integer numberOfTomatoes = slice.getNumberOfTomatoes();
 		Integer numberOfMushrooms = slice.getNumberOfMushroom();
-		return (numberOfTomatoes >= parameters.getMinimumOfEachIngredient() && 
-				numberOfMushrooms >= parameters.getMinimumOfEachIngredient() && 
-				numberOfTomatoes+numberOfMushrooms <= parameters.getMaximumOfIngredients());
+		return (numberOfTomatoes >= parameters.getL() &&
+				numberOfMushrooms >= parameters.getL() &&
+				numberOfTomatoes+numberOfMushrooms <= parameters.getH());
 	}
 	
-	private void setIngredient(Integer row, Integer column, IngredientEnum ingredient) {
+	public void setIngredient(Integer row, Integer column, IngredientEnum ingredient) {
 		grid[row][column] = ingredient;
 	}
 	
 	private void addSlice(Slice slice) {
 		slices.add(slice);
 	}
-	
-	
-	public IngredientEnum[][] getGrid() {
+
+    public List<Slice> getSlices() {
+        return slices;
+    }
+
+    public IngredientEnum[][] getGrid() {
 		return grid;
 	}
 

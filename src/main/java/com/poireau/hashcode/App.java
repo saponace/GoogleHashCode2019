@@ -1,5 +1,7 @@
 package com.poireau.hashcode;
 
+import com.poireau.hashcode.entity.Pizza;
+import com.poireau.hashcode.entity.SubjectParameters;
 import com.poireau.hashcode.utils.IoUtils;
 import com.poireau.hashcode.utils.Profiler;
 import com.poireau.hashcode.utils.FilesPaths;
@@ -26,9 +28,13 @@ public class App {
      */
     public static void execute(String inputFile, String outputFile) throws IOException {
         Profiler profiler = new Profiler();
-        String output = "Hello World !";
+        Pizza pizza = IoUtils.readPizza(inputFile);
+        LOGGER.info("Content of pizza: " + pizza.toString());
+        SubjectParameters subjectParameters = IoUtils.readSubjectParameters(inputFile);
+        LOGGER.info("Subject parameters: " + subjectParameters.getL() + "; " + subjectParameters.getH());
+
+        String output = pizza.toString();
         IoUtils.writeToFile(outputFile, output);
-        LOGGER.info("FINISHED for " + inputFile + "!!!!!");
         LOGGER.info(profiler.measure(inputFile + " execution time: "));
     }
 }

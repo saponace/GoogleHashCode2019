@@ -1,6 +1,11 @@
 package com.poireau.hashcode.utils;
 
 
+import com.poireau.hashcode.entity.IngredientEnum;
+import com.poireau.hashcode.entity.Pizza;
+import com.poireau.hashcode.entity.Slice;
+import com.poireau.hashcode.entity.SubjectParameters;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,56 +23,88 @@ public class IoUtils {
     }
 
     /**
-     * Parse
+     * Parse a pizza
      *
-     * @param file input file
-     * @return
+     * @param filePath input filePath representing a pizza
+     * @return The pizza
      * @throws IOException parsing fail
      */
-    public static List<Object> parse(String file) throws IOException {
-        try (FileReader fileReader = new FileReader(file)) {
+    public static Pizza readPizza(String filePath) throws IOException {
+        try (FileReader fileReader = new FileReader(filePath)) {
             BufferedReader br = new BufferedReader(fileReader);
-            //skip a line with slice instructions
-            br.readLine();
-            List<Object> retVal = new ArrayList<>();
+            Pizza pizza = parseDescriptionLineForPizza(br.readLine());
             int row = 0;
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
                 for (int column = 0; column < fileLine.length(); column++) {
                     Character literal = fileLine.charAt(column);
-                    // TODO: 18/02/2019
+                    IngredientEnum ingredient = getIngredientFromChar(literal);
+                    pizza.setIngredient(row, column, ingredient);
                 }
                 row++;
             }
-            return retVal;
+            return pizza;
         }
     }
 
     /**
-     * Write content to file
-     * @param fileName
-     * @param outputDate
-     * @throws IOException
+     * Convert a character to ingredient
+     * @param character
+     * @return The ingredient
      */
-    public static void writeToFile(String fileName, String outputDate) throws IOException {
-        try (PrintWriter out = new PrintWriter(fileName)) {
-            out.println(outputDate);
+    private static IngredientEnum getIngredientFromChar(Character character){
+        switch (character) {
+            case 'M':
+                return IngredientEnum.MUSHROOM;
+            case 'T':
+                return IngredientEnum.TOMATO;
+                default:
+                    throw new RuntimeException("Invalid input file: '" + character + "' not recognized");
         }
     }
 
     /**
-     * Read content from file
-     * @param fileName
+     * Create a pizza initiazlized with the size specified in the config line
+     * @param line
+     */
+    private static Pizza parseDescriptionLineForPizza(String line){
+        String[] slicedLine = line.split(" ");
+        int nbRows = Integer.parseInt(slicedLine[0]);
+        int nbCols = Integer.parseInt(slicedLine[1]);
+        return new Pizza(nbRows, nbCols);
+    }
+
+    /**
+     * Read subject parameters (h & l) from the subject file
+     * filePath Path to the subject file
+     *
      * @return
+     */
+    public static SubjectParameters readSubjectParameters(String filePath) throws IOException{
+        try (FileReader fileReader = new FileReader(filePath)) {
+            BufferedReader br = new BufferedReader(fileReader);
+            String line = br.readLine();
+            String[] slicedLine = line.split(" ");
+            int l = Integer.parseInt(slicedLine[2]);
+            int h = Integer.parseInt(slicedLine[3]);
+            return new SubjectParameters(l, h);
+        }
+
+
+    }
+
+    /**
+     * Write slices to file
+     * @param pizza
+     * @param fileName
      * @throws IOException
      */
-    public static String readFromFile(String fileName) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(fileName));
-        StringBuilder stringBuilder = new StringBuilder();
-        lines.forEach(
-                line -> stringBuilder.append(line).append("\n")
-        );
-        return stringBuilder.toString();
+    public static void writeSlices(Pizza pizza, String fileName) throws IOException {
+        List<Slice> slices = pizza.getSlices();
+        try (PrintWriter out = new PrintWriter(fileName)) {
+            out.println(slices.size());
+            pizza.getSlices().forEach(s -> out.println(s.toString()));
+        }
     }
 }
 
