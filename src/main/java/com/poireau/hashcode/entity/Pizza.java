@@ -25,6 +25,16 @@ public class Pizza {
 				numberOfTomatoes+numberOfMushrooms <= parameters.getMaximumOfIngredients());
 	}
 	
+	private Boolean isCellInSlices(Integer row, Integer column) {
+		for (Slice slice : slices) {
+			if (row >= slice.getR1() && row <= slice.getR2() &&
+				column >= slice.getC1() && column <= slice.getC2()) {
+				return Boolean.FALSE;
+			}
+		}
+		return Boolean.TRUE;
+	}
+	
 	private void setIngredient(Integer row, Integer column, IngredientEnum ingredient) {
 		grid[row][column] = ingredient;
 	}
