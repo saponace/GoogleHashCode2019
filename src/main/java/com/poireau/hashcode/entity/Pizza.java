@@ -16,6 +16,10 @@ public class Pizza {
 		this.grid = new IngredientEnum[rows][columns];
 	}
 	
+	public IngredientEnum getContentCell(Integer row, Integer col) {
+		return grid[row][col];
+	}
+	
 	public Boolean isSliceValid(Slice slice, SubjectParameters parameters) {
 		Integer numberOfTomatoes = slice.getNumberOfTomatoes();
 		Integer numberOfMushrooms = slice.getNumberOfMushroom();

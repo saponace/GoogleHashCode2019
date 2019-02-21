@@ -2,6 +2,7 @@ package com.poireau.hashcode;
 
 import com.poireau.hashcode.utils.IoUtils;
 import com.poireau.hashcode.utils.Profiler;
+import com.poireau.hashcode.entity.IngredientEnum;
 import com.poireau.hashcode.entity.Pizza;
 import com.poireau.hashcode.entity.Slice;
 import com.poireau.hashcode.entity.SubjectParameters;
@@ -30,6 +31,7 @@ public class PizzaCutter {
                 for (Integer rowInSlice = row; rowInSlice < pizza.getNumberOfRows() - row; rowInSlice++) {
                     for (Integer colInSlice = col; colInSlice < pizza.getNumberOfColumns() - col; colInSlice++) {
                         Slice slice = new Slice(row, col, rowInSlice, colInSlice);
+                        getContentOfSlice(pizza, slice, row, col, rowInSlice, colInSlice);
 
                         if (slice.hasTooMuchIngredients(params.getH())) {
                             break;
@@ -46,6 +48,14 @@ public class PizzaCutter {
 
         return pizza;
     }
+
+	private void getContentOfSlice(Pizza pizza, Slice slice, Integer row, Integer col, Integer rowInSlice, Integer colInSlice) {
+		for (Integer rowCount = row; rowCount < rowInSlice; rowCount++) {
+			for (Integer colCount = col; colCount < colInSlice; colCount++) {
+				slice.addIngredient(pizza.getContentCell(rowCount, colCount));
+			}
+		}
+	}
 
     //public Boolean isValid() {
         //// Est ce que le decoupage est valide par rapport au problème
