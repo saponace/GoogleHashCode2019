@@ -1,5 +1,6 @@
 package com.poireau.hashcode.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Presentation {
@@ -7,7 +8,7 @@ public class Presentation {
 	private List<Slide> slides;
 	
 	public Presentation() {
-		// par defaut
+	    slides = new ArrayList<>();
 	}
 	
 	public void addSlide(Slide slide) {

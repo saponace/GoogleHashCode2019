@@ -9,5 +9,9 @@ public class SlideVertical implements Slide {
 		this.photoVertical1 = photoVertical1;
 		this.photoVertical2 = photoVertical2;
 	}
-	
+
+	@Override
+	public String toString() {
+		return photoVertical1.getId() + " " + photoVertical2.getId();
+	}
 }

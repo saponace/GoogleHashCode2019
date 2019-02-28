@@ -7,5 +7,8 @@ public class SlideHorizontal implements Slide {
 	public SlideHorizontal(Photo photoHorizontale) {
 		this.photoHorizontale = photoHorizontale;
 	}
-	
+	@Override
+	public String toString() {
+		return String.valueOf(photoHorizontale.getId());
+	}
 }
