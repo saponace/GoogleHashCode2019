@@ -1,5 +1,7 @@
 package com.poireau.hashcode.entity;
 
+import java.util.*;
+
 public class SlideVertical implements Slide {
 
 	private Photo photoVertical1;
@@ -11,6 +13,13 @@ public class SlideVertical implements Slide {
 	}
 
 	@Override
+	public Set<String> getTags() {
+		List<String> fullTag = new ArrayList<>();
+		fullTag.addAll(photoVertical1.getTags());
+		fullTag.addAll(photoVertical2.getTags());
+		return new HashSet<>(fullTag);
+	}
+	
 	public String toString() {
 		return photoVertical1.getId() + " " + photoVertical2.getId();
 	}
