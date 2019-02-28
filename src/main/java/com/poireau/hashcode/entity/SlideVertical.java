@@ -20,4 +20,7 @@ public class SlideVertical implements Slide {
 		return new HashSet<>(fullTag);
 	}
 	
+	public String toString() {
+		return photoVertical1.getId() + " " + photoVertical2.getId();
+	}
 }

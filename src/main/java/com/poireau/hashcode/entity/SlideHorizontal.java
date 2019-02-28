@@ -17,4 +17,8 @@ public class SlideHorizontal implements Slide {
 		return new HashSet<>(this.photoHorizontale.getTags());
 	}
 	
+	@Override
+	public String toString() {
+		return String.valueOf(photoHorizontale.getId());
+	}
 }

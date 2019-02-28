@@ -2,6 +2,7 @@ package com.poireau.hashcode.entity;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Photo {
 
@@ -16,7 +17,7 @@ public class Photo {
 		this.vertical = vertical;
 	}
 	
-	public void calculateOccurrences(HashMap<String, Integer> tagsOccurence) {
+	public void computeOccurrences(Map<String, Integer> tagsOccurence) {
 		Integer score = 0;
 		for (String tag : tags) {
 			score += tagsOccurence.get(tag);
@@ -39,7 +40,4 @@ public class Photo {
 	public Integer getTagOccurence() {
 		return tagOccurence;
 	}
-	
-	
-	
 }

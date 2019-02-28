@@ -1,6 +1,9 @@
 package com.poireau.hashcode.utils;
 
 
+import com.poireau.hashcode.entity.Photo;
+import com.poireau.hashcode.entity.Presentation;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,6 +11,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,50 +28,54 @@ public class IoUtils {
      * @return
      * @throws IOException parsing fail
      */
-    public static List<Object> parse(String file) throws IOException {
+    public static List<Photo> readPhotoList(String file) throws IOException {
         try (FileReader fileReader = new FileReader(file)) {
             BufferedReader br = new BufferedReader(fileReader);
-            //skip a line with slice instructions
+
+            // Ignore first line
             br.readLine();
-            List<Object> retVal = new ArrayList<>();
-            int row = 0;
-            String fileLine;
-            while ((fileLine = br.readLine()) != null) {
-                for (int column = 0; column < fileLine.length(); column++) {
-                    Character literal = fileLine.charAt(column);
-                    // TODO: 18/02/2019
-                }
-                row++;
+
+            List<Photo> retVal = new ArrayList<>();
+            int i = 0;
+            String line;
+            while ((line = br.readLine()) != null) {
+                List<String> lineData = Arrays.asList(line.split(" "));
+                Character phtoOrientation = lineData.get(0).charAt(0);
+                List<String> tags = lineData.subList(2, lineData.size());
+                retVal.add(new Photo(i, tags, getPhotoOrientationBooleanFromChar(phtoOrientation)));
+                i++;
             }
             return retVal;
         }
     }
 
     /**
-     * Write content to file
-     * @param fileName
-     * @param outputDate
-     * @throws IOException
+     * Get the orientation boolean of a photo from its char form
+     * @param c
+     * @return
      */
-    public static void writeToFile(String fileName, String outputDate) throws IOException {
-        try (PrintWriter out = new PrintWriter(fileName)) {
-            out.println(outputDate);
+    private static boolean getPhotoOrientationBooleanFromChar(Character c) {
+        switch (c) {
+            case 'H':
+                return false;
+            case 'V':
+                return true;
+            default:
+                throw new RuntimeException("Orientation " + c + " not recognized");
         }
     }
 
     /**
-     * Read content from file
+     * Write content to file
      * @param fileName
-     * @return
+     * @param presentation
      * @throws IOException
      */
-    public static String readFromFile(String fileName) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(fileName));
-        StringBuilder stringBuilder = new StringBuilder();
-        lines.forEach(
-                line -> stringBuilder.append(line).append("\n")
-        );
-        return stringBuilder.toString();
+    public static void writePresentation(String fileName, Presentation presentation) throws IOException {
+        try (PrintWriter out = new PrintWriter(fileName)) {
+            out.println(presentation.getSlides().size());
+            presentation.getSlides().forEach(s -> out.println(s.toString()));
+        }
     }
 }
 
