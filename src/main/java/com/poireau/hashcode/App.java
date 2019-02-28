@@ -2,19 +2,29 @@ package com.poireau.hashcode;
 
 import com.poireau.hashcode.entity.Photo;
 import com.poireau.hashcode.entity.Presentation;
+import com.poireau.hashcode.entity.Slide;
+import com.poireau.hashcode.entity.SlideHorizontal;
+import com.poireau.hashcode.entity.SlideVertical;
 import com.poireau.hashcode.utils.IoUtils;
 import com.poireau.hashcode.utils.Profiler;
+
+import ch.qos.logback.core.joran.spi.NoAutoStart;
+
 import com.poireau.hashcode.utils.FilesPaths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 public class App {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
-
+    
     public static void main(String[] args) throws IOException {
         execute(FilesPaths.A_INPUT_FILE_PATH, FilesPaths.A_OUTPUT_FILE_PATH);
     }
@@ -28,11 +38,22 @@ public class App {
      */
     public static void execute(String inputFile, String outputFile) throws IOException {
         Profiler profiler = new Profiler();
+        Algo algo = new Algo();
         List<Photo> photos = IoUtils.readPhotoList(inputFile);
+        List<Photo> photosVerticales = new ArrayList<>(photos);
+        List<Photo> photosHorizontales = new ArrayList<>(photos);
+        photosVerticales.stream().filter(x -> x.getVertical());
+        photosHorizontales.stream().filter(x -> !x.getVertical());
 
+        List<SlideVertical> slideVerticales = new VerticalPhotoSorting().sortPhotoByTag(photosVerticales, Utils.getTagsNbOccurences(photosVerticales));
+        List<SlideHorizontal> slidesHorizontales = photosHorizontales.stream().map(x -> new SlideHorizontal(x)).collect(Collectors.toList());
+        
         // TODO: 2/28/19 Call algorithm here
-        Presentation presentation = new Presentation();
-//        new VerticalPhotoSorting().sortPhotoByTag(photos, Utils.getTagsNbOccurences(photos));
+        List<Slide> slides = new ArrayList<>();
+        slides.addAll(slideVerticales);
+        slides.addAll(slidesHorizontales);
+
+        Presentation presentation = algo.algoPresentation(slides);
 
         IoUtils.writePresentation(outputFile, presentation);
 
