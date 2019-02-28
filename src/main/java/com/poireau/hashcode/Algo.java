@@ -57,8 +57,9 @@ public class Algo {
 
 	private Slide getNext(List<AssociationSlide> associationSlideList, Slide slide) {
 		for (Iterator<AssociationSlide> it = associationSlideList.iterator(); it.hasNext();) {
-			if (it.next().getLeftSlide() == slide) {
-				return it.next().getRightSlide();
+			AssociationSlide next = it.next();
+			if (next.getLeftSlide() == slide) {
+				return next.getRightSlide();
 			}
 		}
 		return null;
@@ -66,7 +67,8 @@ public class Algo {
 	
 	private void deleteSlide(List<AssociationSlide> associationSlideList, Slide slideToRemove) {
 		for (Iterator<AssociationSlide> itRemove = associationSlideList.iterator(); itRemove.hasNext();) {
-			if (itRemove.next().getLeftSlide() == slideToRemove || itRemove.next().getRightSlide() == slideToRemove) {
+			AssociationSlide next = itRemove.next();
+			if (next.getLeftSlide() == slideToRemove || next.getRightSlide() == slideToRemove) {
 				itRemove.remove();
 			}
 		}

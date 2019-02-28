@@ -40,10 +40,8 @@ public class App {
         Profiler profiler = new Profiler();
         Algo algo = new Algo();
         List<Photo> photos = IoUtils.readPhotoList(inputFile);
-        List<Photo> photosVerticales = new ArrayList<>(photos);
-        List<Photo> photosHorizontales = new ArrayList<>(photos);
-        photosVerticales.stream().filter(x -> x.getVertical());
-        photosHorizontales.stream().filter(x -> !x.getVertical());
+        List<Photo> photosVerticales = photos.stream().filter(x -> x.getVertical()).collect(Collectors.toList());
+        List<Photo> photosHorizontales = photos.stream().filter(x -> !x.getVertical()).collect(Collectors.toList());
 
         List<SlideVertical> slideVerticales = new VerticalPhotoSorting().sortPhotoByTag(photosVerticales, Utils.getTagsNbOccurences(photosVerticales));
         List<SlideHorizontal> slidesHorizontales = photosHorizontales.stream().map(x -> new SlideHorizontal(x)).collect(Collectors.toList());
