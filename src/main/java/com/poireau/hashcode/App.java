@@ -44,7 +44,7 @@ public class App {
         List<Photo> photosHorizontales = photos.stream().filter(x -> !x.getVertical()).collect(Collectors.toList());
 
         List<SlideVertical> slideVerticales = new VerticalPhotoSorting().sortPhotoByTag(photosVerticales, Utils.getTagsNbOccurences(photosVerticales));
-        List<SlideHorizontal> slidesHorizontales = new .stream().map(x -> new SlideHorizontal(x)).collect(Collectors.toList());
+        List<SlideHorizontal> slidesHorizontales = new HorizontalPhotoSorting().sortPhotoByTag(photosHorizontales, Utils.getTagsNbOccurences(photosHorizontales));
         
         // TODO: 2/28/19 Call algorithm here
         List<Slide> slides = new ArrayList<>();
@@ -52,6 +52,7 @@ public class App {
         slides.addAll(slidesHorizontales);
 
         Presentation presentation = new Presentation();
+        presentation.addSlidesVertical(slidesHorizontales);
         presentation.addSlides(slideVerticales);
         // Presentation presentation = algo.algoPresentation(slides);
 

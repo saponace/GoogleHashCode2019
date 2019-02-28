@@ -23,6 +23,11 @@ public class Presentation {
 		this.slides.addAll(slideVerticales);
 		
 	}
+
+	public void addSlidesVertical(List<SlideHorizontal> slidesHorizontales) {
+		this.slides.addAll(slidesHorizontales);
+		
+	}
 	
 	
 	
