@@ -1,9 +1,6 @@
 package com.poireau.hashcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.poireau.hashcode.comparator.OccurenceComparator;
 import com.poireau.hashcode.entity.Photo;
@@ -12,7 +9,7 @@ import com.poireau.hashcode.entity.SlideVertical;
 
 public class VerticalPhotoSorting {
 
-	public List<SlideVertical> sortPhotoByTag(List<Photo> photosVerticales, HashMap<String, Integer> tagsOccurrence) {
+	public List<SlideVertical> sortPhotoByTag(List<Photo> photosVerticales, Map<String, Integer> tagsOccurrence) {
 		for (Photo photo : photosVerticales) {
 			photo.calculateOccurrences(tagsOccurrence);
 		}
