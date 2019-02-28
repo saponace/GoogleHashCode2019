@@ -18,6 +18,11 @@ public class Presentation {
 	public List<Slide> getSlides() {
 		return slides;
 	}
+
+	public void addSlides(List<SlideVertical> slideVerticales) {
+		this.slides.addAll(slideVerticales);
+		
+	}
 	
 	
 	

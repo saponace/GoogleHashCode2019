@@ -23,16 +23,9 @@ public class Algo {
         List<AssociationSlide> associationSlideList = new ArrayList<>();
 
         // Construction des paires de slides
-        for (int i = 0; i < slides.size(); i++) {
-            for (int j = 0; j < slides.size(); j++) {
-                // Pas 2 fois la meme slides dans une paire
-                if (i == j) {
-                    continue;
-                }
-
-                AssociationSlide association = new AssociationSlide(slides.get(i), slides.get(j));
-                associationSlideList.add(association);
-            }
+        for (int i = 0; i < slides.size() / 2; i = i + 2) {
+            AssociationSlide association = new AssociationSlide(slides.get(i), slides.get(i+1));
+            associationSlideList.add(association);
         }
 
         // Trier la liste slidesPair selon le score DESC

@@ -26,7 +26,7 @@ public class App {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
     
     public static void main(String[] args) throws IOException {
-        execute(FilesPaths.A_INPUT_FILE_PATH, FilesPaths.A_OUTPUT_FILE_PATH);
+        execute(FilesPaths.D_INPUT_FILE_PATH, FilesPaths.D_OUTPUT_FILE_PATH);
     }
 
     /**
@@ -51,7 +51,9 @@ public class App {
         slides.addAll(slideVerticales);
         slides.addAll(slidesHorizontales);
 
-        Presentation presentation = algo.algoPresentation(slides);
+        Presentation presentation = new Presentation();
+        presentation.addSlides(slideVerticales);
+        // Presentation presentation = algo.algoPresentation(slides);
 
         IoUtils.writePresentation(outputFile, presentation);
 
