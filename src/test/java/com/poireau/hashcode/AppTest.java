@@ -1,4 +1,4 @@
-package com.google.hashcode;
+package com.poireau.hashcode;
 
 import org.junit.Test;
 
