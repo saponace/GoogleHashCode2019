@@ -11,7 +11,13 @@ public class Presentation {
 	}
 	
 	public void addSlide(Slide slide) {
-		
+		this.slides.add(slide);
 	}
+
+	public List<Slide> getSlides() {
+		return slides;
+	}
+	
+	
 	
 }
