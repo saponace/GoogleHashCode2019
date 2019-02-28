@@ -17,7 +17,7 @@ public class Photo {
 		this.vertical = vertical;
 	}
 	
-	public void calculateOccurrences(Map<String, Integer> tagsOccurence) {
+	public void computeOccurrences(Map<String, Integer> tagsOccurence) {
 		Integer score = 0;
 		for (String tag : tags) {
 			score += tagsOccurence.get(tag);

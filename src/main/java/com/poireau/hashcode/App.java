@@ -32,6 +32,7 @@ public class App {
 
         // TODO: 2/28/19 Call algorithm here
         Presentation presentation = new Presentation();
+//        new VerticalPhotoSorting().sortPhotoByTag(photos, Utils.getTagsNbOccurences(photos));
 
         IoUtils.writePresentation(outputFile, presentation);
 
