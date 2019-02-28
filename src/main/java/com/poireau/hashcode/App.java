@@ -26,7 +26,7 @@ public class App {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
     
     public static void main(String[] args) throws IOException {
-        execute(FilesPaths.A_INPUT_FILE_PATH, FilesPaths.A_OUTPUT_FILE_PATH);
+        execute(FilesPaths.C_INPUT_FILE_PATH, FilesPaths.C_OUTPUT_FILE_PATH);
     }
 
     /**

@@ -8,7 +8,7 @@ public class AssociationSlideComparator implements Comparator<AssociationSlide> 
 
 	@Override
 	public int compare(AssociationSlide association1, AssociationSlide association2) {
-		return association1.getScore().compareTo(association2.getScore());
+		return association2.getScore().compareTo(association1.getScore());
 	}
 
 }
