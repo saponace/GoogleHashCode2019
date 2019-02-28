@@ -46,7 +46,6 @@ public class App {
         List<SlideVertical> slideVerticales = new VerticalPhotoSorting().sortPhotoByTag(photosVerticales, Utils.getTagsNbOccurences(photosVerticales));
         List<SlideHorizontal> slidesHorizontales = new HorizontalPhotoSorting().sortPhotoByTag(photosHorizontales, Utils.getTagsNbOccurences(photosHorizontales));
         
-        // TODO: 2/28/19 Call algorithm here
         List<Slide> slides = new ArrayList<>();
         slides.addAll(slideVerticales);
         slides.addAll(slidesHorizontales);
@@ -54,6 +53,7 @@ public class App {
         Presentation presentation = new Presentation();
         presentation.addSlidesVertical(slidesHorizontales);
         presentation.addSlides(slideVerticales);
+        // Commented out for performance reasons
         // Presentation presentation = algo.algoPresentation(slides);
 
         IoUtils.writePresentation(outputFile, presentation);

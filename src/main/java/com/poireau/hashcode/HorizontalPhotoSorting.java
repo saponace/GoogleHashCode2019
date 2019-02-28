@@ -20,7 +20,7 @@ public class HorizontalPhotoSorting {
 		List<SlideHorizontal> slideHorizontalList = new ArrayList<>();
 		Integer nbPhotos = photos.size();
 		for (int i = 0; i < nbPhotos; i++) {
-			Photo photoVertical1 = photos.get(nbPhotos);
+			Photo photoVertical1 = photos.get(i);
 			SlideHorizontal slidevertical = new SlideHorizontal(photoVertical1 );
 			slideHorizontalList.add(slidevertical);
 		}
