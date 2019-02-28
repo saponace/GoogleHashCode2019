@@ -10,4 +10,8 @@ public class Presentation {
 		// par defaut
 	}
 	
+	public void addSlide(Slide slide) {
+		
+	}
+	
 }
